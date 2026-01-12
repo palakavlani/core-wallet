@@ -1,14 +1,14 @@
 # Stage 1: Build the Application
-FROM maven:3.8.5-openjdk-17 AS build
+# CHANGE: Use Maven with Java 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-# Build the jar file, skipping tests to save time
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the Application
-FROM openjdk:17-jdk-slim
+# CHANGE: Use Java 21 Runtime
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-# Copy the built jar from Stage 1
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
