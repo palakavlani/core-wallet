@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: ledger_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wallet_db
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_DATA_REDIS_HOST: redis
+  postgres:
+    image: postgres:15-alpine
+    container_name: ledger_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: wallet_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: ledger_mq
+    ports:
+      - "5673:5672"   
+      - "15673:15672" 
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+  redis:
+    image: redis:alpine
+    container_name: ledger_cache
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
