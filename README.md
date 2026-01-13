@@ -24,3 +24,4 @@ You do **not** need Java, Maven, or a Database installed. You only need Docker.
    ```bash
    git clone [https://github.com/palakavlani/core-wallet.git](https://github.com/palakavlani/core-wallet.git)
    cd core-wallet
+   docker compose -d --build
