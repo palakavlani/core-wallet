@@ -1,9 +1,3 @@
-Here is a comprehensive, polished **Testing & Verification Guide**. You can save this as `TESTING.md` in your repository or paste it directly into an email for your team/reviewers.
-
-It covers the setup, the API JSON formats, and exactly how to verify the "Advanced Engineering" parts (Redis & RabbitMQ).
-
----
-
 # 📘 Core Wallet Service - Testing & Verification Guide
 
 **Repository:** [https://github.com/palakavlani/core-wallet](https://www.google.com/search?q=https://github.com/palakavlani/core-wallet)
